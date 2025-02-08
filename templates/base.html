@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Hệ thống ký hóa đơn{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <nav>
+        <a href="{{ url_for('home') }}">Trang chủ</a>
+        {% if session.get('user') %}
+            <a href="{{ url_for('upload') }}">Tải PDF</a>
+            <a href="{{ url_for('logout') }}">Đăng xuất</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Đăng nhập</a>
+        {% endif %}
+    </nav>
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

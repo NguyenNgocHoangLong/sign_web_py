@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chèn chữ ký vào PDF</title>
+</head>
+<body>
+    <h2>Tải lên PDF và ảnh chữ ký</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="pdf">Chọn file PDF:</label>
+        <input type="file" name="pdf" accept="application/pdf" required><br><br>
+
+        <label for="signature">Chọn ảnh chữ ký (PNG, JPG):</label>
+        <input type="file" name="signature" accept="image/*" required><br><br>
+
+        <button type="submit">Tải lên và xử lý</button>
+    </form>
+</body>
+</html>

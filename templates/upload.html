@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Tải lên PDF</title>
+</head>
+<body>
+    <h2>Tải lên PDF để ký</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="email">Chọn Email:</label>
+        <select name="email">
+            <option value="nhanvien1@gmail.com">Nhân viên</option>
+            <option value="manager1@gmail.com">Quản lý</option>
+            <option value="director1@gmail.com">Giám đốc</option>
+            <option value="evgm1@gmail.com">EVGM</option>
+        </select>
+        <input type="file" name="file" required>
+        <button type="submit">Tải lên và Ký</button>
+    </form>
+</body>
+</html>
