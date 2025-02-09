@@ -2,6 +2,13 @@ import pymupdf as fitz
 import os
 from datetime import datetime
 from config import Config
+from models import Khach
+
+def get_signature_by_email(email):
+    khach = Khach.query.filter_by(Email=email).first()
+    if khach:
+        return khach.Sign
+    return None
 
 def add_signature_to_pdf(pdf_path, signature_path, position):
     doc = fitz.open(pdf_path)

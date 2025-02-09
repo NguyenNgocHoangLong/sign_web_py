@@ -1,28 +1,18 @@
-{% extends "base.html" %}
-
-{% block title %}Đăng ký{% endblock %}
-
-{% block content %}
-<h2>Đăng ký tài khoản</h2>
-<form action="{{ url_for('register') }}" method="POST">
-    <label>Tên:</label>
-    <input type="text" name="name" required>
-
-    <label>Email:</label>
-    <input type="email" name="email" required>
-
-    <label>Mật khẩu:</label>
-    <input type="password" name="password" required>
-
-    <label>Chức vụ:</label>
-    <select name="position" required>
-        <option value="staff">Nhân viên</option>
-        <option value="manager">Quản lý</option>
-        <option value="director">Giám đốc</option>
-        <option value="evgm">EVGM</option>
-    </select>
-
-    <button type="submit">Đăng ký</button>
-</form>
-<p>Đã có tài khoản? <a href="{{ url_for('login') }}">Đăng nhập</a></p>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Đăng ký</title>
+</head>
+<body>
+    <h2>Đăng ký</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        {{ form.username.label }} {{ form.username() }}<br>
+        {{ form.email.label }} {{ form.email() }}<br>
+        {{ form.password.label }} {{ form.password() }}<br>
+        {{ form.confirm_password.label }} {{ form.confirm_password() }}<br>
+        {{ form.submit() }}
+    </form>
+</body>
+</html>

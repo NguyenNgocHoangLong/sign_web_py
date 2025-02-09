@@ -1,12 +1,14 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import UserMixin
 
-db = SQLAlchemy()
+db = SQLAlchemy()  # ✅ Không import từ app.py để tránh vòng lặp
 
-class User(db.Model, UserMixin):
+class Khach(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(100), unique=True, nullable=False)
-    position = db.Column(db.String(50), nullable=False)
-    email = db.Column(db.String(150), unique=True, nullable=False)
-    password = db.Column(db.String(200), nullable=False)
-    signature = db.Column(db.String(200), nullable=True)  # Đường dẫn hình chữ ký
+    Khach_Name = db.Column(db.String(100), nullable=False)
+    Position = db.Column(db.String(100), nullable=False)
+    Email = db.Column(db.String(150), unique=True, nullable=False)
+    Sign = db.Column(db.String(150), nullable=False)
+    Password = db.Column(db.String(150), nullable=False)  # Cần mã hóa sau
+
+    def __repr__(self):
+        return f"<Khach {self.Khach_Name}>"

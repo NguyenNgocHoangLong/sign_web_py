@@ -1,35 +1,14 @@
 import sqlite3
+from flask_sqlalchemy import SQLAlchemy
 
-# Kết nối hoặc tạo database SQLite
-conn = sqlite3.connect("Khach.db")
-cursor = conn.cursor()
+db = SQLAlchemy()  # ✅ Chỉ khai báo 1 lần, KHÔNG truyền `app` vào đây ban đầu
 
-# Tạo bảng Khach nếu chưa tồn tại
-cursor.execute("""
-CREATE TABLE IF NOT EXISTS Khach (
-    KhachID INTEGER PRIMARY KEY AUTOINCREMENT,
-    Khach_Name TEXT NOT NULL,
-    Position TEXT NOT NULL,
-    Email TEXT UNIQUE NOT NULL,
-    Sign TEXT NOT NULL,
-    Password TEXT NOT NULL
-)
-""")
+def create_app():
+    from flask import Flask
+    app = Flask(__name__)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///khach.db"
+    app.config["SECRET_KEY"] = "your_secret_key"
 
-# Danh sách dữ liệu khách hàng mẫu
-khach_list = [
-    ("nhanvien1", "staff", "nhanvien1@gmail.com", "NV1.jpg", "nv123"),
-    ("manager1", "manager", "manager1@gmail.com", "MGR1.jpg", "mgr123"),
-    ("director1", "director", "director1@gmail.com", "DIR.jpg", "dir123"),
-    ("evgm1", "evgm", "evgm1@gmail.com", "EVGM1.jpg", "evgm123"),
-]
+    db.init_app(app)  # ✅ Khởi tạo SQLAlchemy với Flask app
 
-# Chèn dữ liệu mẫu nếu chưa có
-for khach in khach_list:
-    try:
-        cursor.execute("INSERT INTO Khach (Khach_Name, Position, Email, Sign, Password) VALUES (?, ?, ?, ?, ?)", khach)
-    except sqlite3.IntegrityError:
-        pass  # Tránh chèn trùng dữ liệu nếu đã tồn tại
-
-conn.commit()  # Lưu thay đổi
-conn.close()  # Đóng kết nối
+    return app
